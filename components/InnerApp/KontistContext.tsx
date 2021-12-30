@@ -95,9 +95,10 @@ function getClient() {
     "verifier",
     sessionStorage.getItem("verifier") || (Math.random() + "").substring(2)
   );
+  const redirectUri = `https://${location.host}`;
   const client = new Client({
     clientId: "b8a51b3b-5616-46a7-9f5a-7c9d7482024d",
-    redirectUri: "http://localhost:3003",
+    redirectUri,
     scopes: ["transactions", "statements"],
     state: sessionStorage.getItem("state")!,
     verifier: sessionStorage.getItem("verifier")!,
