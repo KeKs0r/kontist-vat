@@ -95,9 +95,12 @@ function getClient() {
     "verifier",
     sessionStorage.getItem("verifier") || (Math.random() + "").substring(2)
   );
-  const redirectUri = process.env.NEXT_PUBLIC_KONTIST_CALLBACK_URL;
+  const redirectUri = process.env.NEXT_PUBLIC_KONTIST_CALLBACK_URL!;
+  assert(redirectUri, "Kontist needs RedirectUri");
+  const clientId = process.env.NEXT_PUBLIC_KONTIST_CLIENT_ID!;
+  assert(clientId, "Kontist needs clientId");
   const client = new Client({
-    clientId: process.env.NEXT_PUBLIC_KONTIST_CLIENT_ID!,
+    clientId,
     redirectUri,
     scopes: ["transactions", "statements"],
     state: sessionStorage.getItem("state")!,
@@ -106,4 +109,10 @@ function getClient() {
   //@ts-ignore
   window.konist = client;
   return client;
+}
+
+function assert(test: any, message: string) {
+  if (!test) {
+    throw new Error(message);
+  }
 }
