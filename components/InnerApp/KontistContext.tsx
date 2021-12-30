@@ -95,7 +95,7 @@ function getClient() {
     "verifier",
     sessionStorage.getItem("verifier") || (Math.random() + "").substring(2)
   );
-  const redirectUri = `https://${location.host}`;
+  const redirectUri = process.env.NEXT_PUBLIC_KONTIST_CALLBACK_URL;
   const client = new Client({
     clientId: process.env.NEXT_PUBLIC_KONTIST_CLIENT_ID!,
     redirectUri,
