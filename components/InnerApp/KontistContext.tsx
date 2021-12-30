@@ -15,7 +15,7 @@ type KontistContextType = {
   onUnauthorized: () => void;
 };
 
-const KontistContext = createContext<KontistContextType>();
+const KontistContext = createContext<KontistContextType | undefined>(undefined);
 
 export function KontistAuthProvider({
   children,
@@ -77,12 +77,12 @@ export function KontistAuthProvider({
   );
 }
 
-export function useKontistContext() {
-  return useContext(KontistContext);
+export function useKontistContext(): KontistContextType {
+  return useContext(KontistContext)!;
 }
 
 export function useKontist() {
-  return useContext(KontistContext).client;
+  return useKontistContext().client;
 }
 
 function getClient() {

@@ -18,7 +18,7 @@ export type AppState = {
 
 export type PeriodSchedule = "year" | "quarter" | "month";
 
-const AppContext = createContext<AppContext>();
+const AppContext = createContext<AppContext | undefined>(undefined);
 
 export function AppStateProvider({ children }: { children: React.ReactNode }) {
   const initialState: AppState = {
@@ -56,8 +56,8 @@ export function AppStateProvider({ children }: { children: React.ReactNode }) {
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 }
 
-export function useApp() {
-  return useContext(AppContext);
+export function useApp(): AppContext {
+  return useContext(AppContext)!;
 }
 
 type ChangeIstOrSoll = {
