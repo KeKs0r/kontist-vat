@@ -97,7 +97,7 @@ function getClient() {
   );
   const redirectUri = `https://${location.host}`;
   const client = new Client({
-    clientId: process.env.NEXT_PUBLIC_KONTIST_CLIENT_ID,
+    clientId: process.env.NEXT_PUBLIC_KONTIST_CLIENT_ID!,
     redirectUri,
     scopes: ["transactions", "statements"],
     state: sessionStorage.getItem("state")!,
